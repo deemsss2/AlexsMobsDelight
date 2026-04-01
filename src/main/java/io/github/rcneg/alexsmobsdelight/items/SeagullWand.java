@@ -5,7 +5,6 @@ import com.github.alexthe666.alexsmobs.entity.EntityRaccoon;
 import com.github.alexthe666.alexsmobs.misc.AMAdvancementTriggerRegistry;
 import io.github.rcneg.alexsmobsdelight.helper.ItemHelper;
 import io.github.rcneg.alexsmobsdelight.init.ItemRegistry;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,7 +14,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -29,7 +27,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class SeagullWand extends HoeItem {
@@ -52,7 +49,7 @@ public class SeagullWand extends HoeItem {
                 LivingEntity target = (LivingEntity) hits.get(0);
                 List<ItemStack> itemStacks = new ArrayList<>();
                 ItemStack foodStack = ItemStack.EMPTY;
-                if(hits instanceof Player targetPlayer){
+                if(target instanceof Player targetPlayer){
                     //seagull loot players
                     for(int i = 0; i < 9; ++i) {
                         ItemStack stackIn = targetPlayer.getInventory().items.get(i);
@@ -60,7 +57,33 @@ public class SeagullWand extends HoeItem {
                             itemStacks.add(stackIn);
                         }
                     }
-                } else {
+                } if(target instanceof AbstractVillager villager){
+                    //loot villagers
+                    MerchantOffers originalOffers = villager.getOffers();
+                    MerchantOffers offers = new MerchantOffers();
+                    if (!originalOffers.isEmpty()) {
+                        for(MerchantOffer o : originalOffers){
+                            if(!o.isOutOfStock()){
+                                offers.add(o);
+                            }
+                        }
+                        if(!offers.isEmpty()){
+                            MerchantOffer offer = offers.get(offers.size() == 1 ? 0 : player.getRandom().nextInt(offers.size() - 1));
+                            if (offer != null) {
+                                ItemStack stealStack = offer.getResult().getItem() == Items.EMERALD ? offer.getBaseCostA() : offer.getResult();
+                                if (!stealStack.isEmpty() && !offer.isOutOfStock()) {
+                                    for(int i = 1; i <= offer.getMaxUses(); i++){
+                                        offer.increaseUses();
+                                    }
+                                    ItemStack copy = stealStack.copy();
+                                    copy.setCount(1);
+                                    itemStacks.add(copy);
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
                     if(isStealableFood(target.getItemInHand(InteractionHand.MAIN_HAND))){
                         itemStacks.add(target.getItemInHand(InteractionHand.MAIN_HAND));
                     }
