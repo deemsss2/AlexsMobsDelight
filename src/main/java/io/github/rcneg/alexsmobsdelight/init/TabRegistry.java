@@ -16,7 +16,8 @@ public class TabRegistry {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AlexsMobsDelight.MODID);
     private static final List<Supplier<Item>> NO_TAB_ITEMS = Arrays.asList(
             ItemRegistry.MIMICANDY,
-            ItemRegistry.DIMENSIONAL_FOOD
+            ItemRegistry.DIMENSIONAL_FOOD,
+            ItemRegistry.DIMENSIONAL_SLICER
     );
 
 

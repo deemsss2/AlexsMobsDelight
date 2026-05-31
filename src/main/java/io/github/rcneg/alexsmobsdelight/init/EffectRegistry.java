@@ -24,6 +24,7 @@ public class EffectRegistry {
     public static final RegistryObject<MobEffect> SEAGULL_ANOREXIA = MOB_EFFECTS.register("seagull_anorexia", () -> new SeagullAnorexiaEffect(MobEffectCategory.BENEFICIAL, -3910904));
     public static final RegistryObject<MobEffect> CRYSTALLIZE_WALKER = MOB_EFFECTS.register("crystallize_walker", () -> new CrystallizeWalkerEffect(MobEffectCategory.BENEFICIAL, -4184));
     public static final RegistryObject<MobEffect> POISON_FANGS = MOB_EFFECTS.register("poison_fangs", () -> new AMDMobEffect(MobEffectCategory.BENEFICIAL, -9999028));
+    public static final RegistryObject<MobEffect> FLUTTERING = MOB_EFFECTS.register("fluttering", () -> new AMDMobEffect(MobEffectCategory.BENEFICIAL, -9999028));
 
     public static final RegistryObject<MobEffect> EXTENDED_TOUCH = MOB_EFFECTS.register("extended_touch", () -> new AMDMobEffect(MobEffectCategory.BENEFICIAL, -4184).addAttributeModifier(ForgeMod.BLOCK_REACH.get(), "93018673-1364-4498-6341-634563113235", 1, AttributeModifier.Operation.ADDITION));
     public static final RegistryObject<MobEffect> EXTENDED_SCARE = MOB_EFFECTS.register("extended_scare", () -> new AMDMobEffect(MobEffectCategory.BENEFICIAL, -4184).addAttributeModifier(ForgeMod.ENTITY_REACH.get(), "93018673-1364-4498-6341-902490321540", 1, AttributeModifier.Operation.ADDITION));

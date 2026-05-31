@@ -63,7 +63,7 @@ public class SeagullWand extends HoeItem {
                     MerchantOffers offers = new MerchantOffers();
                     if (!originalOffers.isEmpty()) {
                         for(MerchantOffer o : originalOffers){
-                            if(!o.isOutOfStock()){
+                            if(!o.isOutOfStock() && (o.getResult().isEdible() || o.getBaseCostA().isEdible())){
                                 offers.add(o);
                             }
                         }
@@ -154,5 +154,6 @@ public class SeagullWand extends HoeItem {
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(ItemHelper.customColor(Component.translatable("tooltip.alexsmobsdelight.seagull_wand"), 251, 198, 69));
+        tooltip.add(ItemHelper.customColor(Component.translatable("tooltip.alexsmobsdelight.seagull_wand_1"), 251, 198, 69));
     }
 }

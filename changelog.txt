@@ -1,3 +1,20 @@
+- 1.0.4
+   Add more foods items (centipede, maggot, tarantula hawk, leafcut ant, cockroach).
+   Add stealing villagers' trade list food items ability for Seagull Wand.
+   Add config for foods which can not used to convert to the Enchanted Seagull (Especially sandwich in SAR, too imba!)
+   Add Fluttering effect.
+   Change Cthulhus Breakfast to always eat food.
+   Change some food ingredients eating speed.
+   Change stack size for Surflygfisk.
+   Change Crocodile Catfish Stew food properties.
+   Change Seagull Anorexia effect to make it stronger.
+   Fix Seagull Wand stealing player issue.
+   Seagull can be enchanted by foods with Effect NBT.
+- 1.0.3
+   Add Dimensional Slicer (WIP).
+   Modify Crocodile and Lobster knife attack damage.
+   Fix client model loaded on server issue.
+   Fix License in mods.toml
 - 1.0.2
    Apply the rate of applying food effects when seagull store food effects.
    Add JEI integration for Kiviak.

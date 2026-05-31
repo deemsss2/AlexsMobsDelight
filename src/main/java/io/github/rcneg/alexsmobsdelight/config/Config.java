@@ -26,8 +26,10 @@ public class Config
     public static ForgeConfigSpec.BooleanValue PUPFISH_BREAK;
 
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ETERNAL_FOODS;
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ENCHANTED_SEAGULL_BLACKLIST;
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> LOOTING_ENTITIES_BLACKLIST;
     public static List<Item> ETERNAL_FOODS_ITEMS;
+    public static List<Item> ENCHANTED_SEAGULL_BLACKLIST_ITEMS;
     public static List<? extends EntityType<?>> LOOTING_BLACKLIST;
     static {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -37,12 +39,17 @@ public class Config
                 .defineInRange("EatCooldown", 160, 0, Integer.MAX_VALUE);
 
         ETERNAL_FOODS = COMMON_BUILDER
-                .comment("A list of eternal foods which can be used to convert Eternal Cooked Seagull.")
+                .comment("A list of eternal foods which can be used to convert to the Eternal Cooked Seagull.")
                 .defineListAllowEmpty("EternalFoodItems",
                         List.of("alexsmobsdelight:eternal_cooked_seagull",
                                 "alexsmobsdelight:enchanted_eternal_cooked_seagull",
                                 "artifacts:eternal_steak",
                                 "artifacts:everlasting_beef"
+                        ), Config::validateItemName);
+        ENCHANTED_SEAGULL_BLACKLIST = COMMON_BUILDER
+                .comment("A list of foods which can not be absorbed by seagull to convert to the Enchanted Seagull.")
+                .defineListAllowEmpty("EnchantedSeagullBlacklist",
+                        List.of("someassemblyrequired:sandwich"
                         ), Config::validateItemName);
         COMMON_BUILDER.pop();
         COMMON_BUILDER.push("Crocodile Karambit");
@@ -86,6 +93,7 @@ public class Config
     static void onLoad(final ModConfigEvent event)
     {
         ETERNAL_FOODS_ITEMS = ETERNAL_FOODS.get().stream().map(name -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(name))).toList();
+        ENCHANTED_SEAGULL_BLACKLIST_ITEMS = ENCHANTED_SEAGULL_BLACKLIST.get().stream().map(name -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(name))).toList();
 
         LOOTING_BLACKLIST = LOOTING_ENTITIES_BLACKLIST.get().stream().map(name -> ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(name))).toList();
     }

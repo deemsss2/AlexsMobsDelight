@@ -32,6 +32,8 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
     mappings channel: mapping_channel, version: mapping_version
 
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
     copyIdeResources = true
 
     runs {
@@ -110,7 +112,10 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:7596353")
     implementation fg.deobf("curse.maven:citadel-331936:5633260")
     implementation fg.deobf("curse.maven:alexs-mobs-426558:5698791")
+    implementation fg.deobf("curse.maven:lodestone-616457:6213794")
+    implementation fg.deobf("curse.maven:miners-delight-plus-689630:5038950")
     runtimeOnly fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
+    runtimeOnly fg.deobf("curse.maven:appleskin-248787:4770828")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 

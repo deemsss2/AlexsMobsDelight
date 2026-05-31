@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "miners_delight:copper_cup"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "alexsmobs:centipede_leg"
+    },
+    {
+      "item": "miners_delight:cave_carrot"
+    },
+    {
+      "item": "miners_delight:cave_carrot"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "alexsmobsdelight:cave_centipede_soup_cup"
+  }
+}

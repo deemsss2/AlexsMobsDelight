@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "alexsmobs:cockroach_ootheca"
+    },
+    {
+      "item": "alexsmobs:cockroach_ootheca"
+    },
+    {
+      "item": "alexsmobs:cockroach_wing"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "alexsmobsdelight:cockroach_protein_soup"
+  }
+}

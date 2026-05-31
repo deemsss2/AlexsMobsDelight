@@ -1,5 +1,6 @@
 package io.github.rcneg.alexsmobsdelight.init;
 
+import com.github.alexthe666.alexsmobs.client.render.RenderCrimsonMosquito;
 import io.github.rcneg.alexsmobsdelight.client.renderer.SuperSeagullRenderer;
 import io.github.rcneg.alexsmobsdelight.client.renderer.ThrownDartRenderer;
 import io.github.rcneg.alexsmobsdelight.client.renderer.ThrownPointedItemRenderer;
@@ -16,6 +17,8 @@ public class RendererRegistry {
         event.registerEntityRenderer(EntityTypeRegistry.THROWN_DART.get(), ThrownDartRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.THROWN_BANANA.get(), ThrownPointedItemRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.SUPER_SEAGULL.get(), SuperSeagullRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.SUPER_MOSQUITO.get(), RenderCrimsonMosquito::new);
+
     }
 
 }

@@ -38,6 +38,12 @@ public class BlockRegistry {
     public static final RegistryObject<Block> WHALE_MEAT_STEWED_WITH_PORK = BLOCKS.register("whale_meat_stewed_with_pork", () -> {
         return new WhalePorkStewBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).sound(SoundType.DECORATED_POT), ItemRegistry.POT_OF_WHALE_MEAT_STEWED_WITH_PORK, true);
     });
+    public static final RegistryObject<Block> FRIED_TARANTULA_HAWK = BLOCKS.register("fried_tarantula_hawk", () -> {
+        return new FriedTarantulaHawkBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), ItemRegistry.SERVE_OF_FRIED_TARANTULA_HAWK, true);
+    });
+    public static final RegistryObject<Block> MUSHROOMS_BRAISED_WITH_CENTIPEDE = BLOCKS.register("mushrooms_braised_with_centipede", () -> {
+        return new MushroomsBraisedWithCentipedeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).sound(SoundType.COPPER), ItemRegistry.PLATE_OF_MUSHROOMS_BRAISED_WITH_CENTIPEDE, true);
+    });
     public static final RegistryObject<Block> BANANA_BLOCK = BLOCKS.register("banana_block", () -> {
         return new BananaBlock(BlockBehaviour.Properties.copy(Blocks.COCOA).sound(SoundType.BIG_DRIPLEAF).noCollission());
     });

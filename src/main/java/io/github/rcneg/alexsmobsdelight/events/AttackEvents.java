@@ -1,14 +1,12 @@
 package io.github.rcneg.alexsmobsdelight.events;
 
 import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
-import com.github.alexthe666.alexsmobs.entity.EntityDevilsHolePupfish;
-import com.github.alexthe666.alexsmobs.entity.EntitySeagull;
+import com.github.alexthe666.alexsmobs.entity.EntityTarantulaHawk;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import io.github.rcneg.alexsmobsdelight.accessor.IEntitySeagullData;
 import io.github.rcneg.alexsmobsdelight.config.Config;
 import io.github.rcneg.alexsmobsdelight.init.EffectRegistry;
 import io.github.rcneg.alexsmobsdelight.init.ItemRegistry;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,17 +19,21 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,7 +41,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Mod.EventBusSubscriber
 public class AttackEvents {
@@ -122,6 +123,59 @@ public class AttackEvents {
                     addEntityDrops(event, meat);
                 }else if(seagull.amd$getConsumedEternalFood()){
                     addEntityDrops(event, new ItemStack(ItemRegistry.ETERNAL_COOKED_SEAGULL.get()));
+                }
+            }
+
+            if (entity instanceof EntityTarantulaHawk hawk){
+                if(hawk.isBaby()){
+                    if(hawk.isOnFire()){
+                        addEntityDrops(event, new ItemStack(ItemRegistry.COOKED_TARANTULA_HAWK_LARVA.get()));
+                    }else {
+                        addEntityDrops(event, new ItemStack(ItemRegistry.RAW_TARANTULA_HAWK_LARVA.get()));
+                    }
+                }
+            }
+
+            if (event.getEntity().level() instanceof ServerLevel level && event.getSource().getEntity() instanceof LivingEntity attacker) {
+                if(attacker.getMainHandItem().is(ItemRegistry.DIMENSIONAL_SLICER.get())){
+                    ResourceLocation lootId = entity.getLootTable();
+                    LootTable lootTable = level.getServer().getLootData().getLootTable(lootId);
+                    List<ItemStack> allDrops = new ArrayList<>();
+                    List<Item> actualDrops = new ArrayList<>();
+                    LootContext ctx = new LootContext.Builder(
+                            new LootParams.Builder(level)
+                                    .withParameter(LootContextParams.THIS_ENTITY, entity)
+                                    .withParameter(LootContextParams.ORIGIN, entity.position())
+                                    .withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource())
+                                    .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
+                                    .create(LootContextParamSets.ENTITY)
+                    ).create(null);
+                    for (LootPool pool : lootTable.pools) {
+                        for (LootPoolEntryContainer entry : pool.entries) {
+                            if (entry instanceof LootPoolSingletonContainer singleton) {
+                                if(singleton instanceof LootItem lootItem){
+                                    ItemStack baseStack = new ItemStack(lootItem.item);
+                                    for (LootItemFunction function : singleton.functions) {
+                                        baseStack = function.apply(baseStack, ctx);
+                                    }
+                                    if (baseStack.getCount() <= 0) {
+                                        baseStack.setCount(1);
+                                    }
+                                    allDrops.add(baseStack.copy());
+                                }
+
+                            }
+                        }
+                    }
+                    for(ItemEntity actualDrop : event.getDrops()){
+                        actualDrops.add(actualDrop.getItem().getItem());
+                    }
+                    for(ItemStack drop : allDrops){
+                        drop.setCount(1);
+                        if(!actualDrops.contains(drop.getItem())){
+                            addEntityDrops(event, drop);
+                        }
+                    }
                 }
             }
         }

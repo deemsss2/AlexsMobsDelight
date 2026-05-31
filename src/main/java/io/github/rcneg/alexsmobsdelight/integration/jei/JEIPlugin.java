@@ -6,23 +6,11 @@ import io.github.rcneg.alexsmobsdelight.integration.jei.category.KiviakDecomposi
 import io.github.rcneg.alexsmobsdelight.integration.jei.resource.KiviakDecompositionDummy;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
-import vectorwing.farmersdelight.client.gui.CookingPotScreen;
-import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModMenuTypes;
-import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
-import vectorwing.farmersdelight.integration.jei.category.DecompositionRecipeCategory;
-import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

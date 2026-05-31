@@ -36,6 +36,7 @@ public class AlexsMobsDelight
         EntityTypeRegistry.ENTITY_TYPES.register(modEventBus);
         LootModifierRegistry.LOOT_MODIFIER.register(modEventBus);
         TabRegistry.CREATIVE_MODE_TABS.register(modEventBus);
+        NetworkRegistry.register();
         MinecraftForge.EVENT_BUS.register(this);
     }
 

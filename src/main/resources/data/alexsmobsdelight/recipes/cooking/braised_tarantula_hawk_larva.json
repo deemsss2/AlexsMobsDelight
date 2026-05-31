@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 400,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "alexsmobsdelight:raw_tarantula_hawk_larva"
+    },
+    {
+      "item": "alexsmobsdelight:raw_tarantula_hawk_larva"
+    },
+    {
+      "item": "alexsmobsdelight:raw_tarantula_hawk_larva"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:crops/onion"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "alexsmobsdelight:braised_tarantula_hawk_larva"
+  }
+}
